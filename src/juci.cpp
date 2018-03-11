@@ -7,9 +7,26 @@
 //============================================================================
 
 #include <iostream>
+#include "game.h"
 using namespace std;
 
+void game_loop(){
+	game my_game;
+	my_game.init();
+	int winner=0;
+	while (winner==0){
+		game::input inp = my_game.read_input();
+		my_game.process_input(inp);
+		winner=my_game.find_winner();
+	}
+	cout << winner;
+}
+
 int main() {
+
+	game_loop();
+	return 0;
+
 	/*int valami;
 	cout << "valami:";
 	cin >> valami;
