@@ -9,12 +9,13 @@
 #define GAME_H_
 
 class game{
+	int mat[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
+	int next_player = 1;
 public:
 	void init();
 	struct input{
 		int row;
 		int col;
-		int player;
 	};
 	input read_input();
 	int find_winner();
