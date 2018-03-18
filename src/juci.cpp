@@ -13,13 +13,20 @@ using namespace std;
 void game_loop(){
 	game my_game;
 	my_game.init();
-	int winner=0;
-	while (winner==0){
+
+	while (!my_game.game_over()){
 		game::input inp = my_game.read_input();
 		my_game.process_input(inp);
-		winner=my_game.find_winner();
 	}
-	cout << winner;
+	int winner = my_game.find_winner();
+	if (winner == 0)
+	{
+		cout << "dontetlen!" << endl;
+	}
+	else
+	{
+		cout << "nyertes: " << winner << endl;
+	}
 }
 
 int main() {

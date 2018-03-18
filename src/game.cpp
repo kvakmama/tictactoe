@@ -7,6 +7,7 @@
 
 #include "game.h"
 #include <iostream>
+#include <limits>
 using namespace std;
 
 int row,col = 0;
@@ -52,19 +53,71 @@ int game::find_winner(){
 	{
 		return 0;
 	}
-	cout << "win\n";
 	return 3-next_player;
 }
+
+bool game::game_over(){
+	for ( int i = 0; i < 3; i++ )
+	{
+		for ( int j = 0; j < 3; j++ )
+		{
+			if (mat[i][j] == 0)
+			{
+				int winner = find_winner();
+				if (winner == 0)
+				{
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+int y = 0;
+int kaki(){
+	bool valid = false;
+	while (!valid)
+			{
+				valid = true;
+				cout <<"Please enter an Integer"<< endl;
+				cin >> y;
+				if(cin.fail() || (y>2) || (y<0) )
+				{
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(),'\n');
+					cout << "Please enter an Integer between 0-2." << endl;
+					valid = false;
+				}
+			}
+	return y;
+}
+
+int kaki2(string goal)
+{
+	int y;
+	do {
+		cin.clear();
+		cin.ignore();
+		cout << "Please enter an integer for " << goal << "\n";
+		cin >> y;
+	} while(cin.fail() || y < 0 || y > 2);
+	return y;
+}
+
 game::input game::read_input(){
-	cout << "row: ";
-	cin >> row;
-	cout << "col: ";
-	cin >> col;
-	cout << "input\n";
+
+	row = kaki();
+	col = kaki();
 	return input{row,col};
 }
+
 bool game::process_input(input inp){
 	cout << "process\n";
+	if (mat[inp.row][inp.col] != 0)
+	{
+		return false;
+	}
 	mat[inp.row][inp.col] = next_player;
 
 	for ( int i = 0; i < 3; i++ )

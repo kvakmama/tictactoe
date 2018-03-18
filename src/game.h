@@ -20,6 +20,7 @@ public:
 	input read_input();
 	int find_winner();
 	bool process_input(input inp);
+	bool game_over();
 };
 
 
